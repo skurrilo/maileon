@@ -1,4 +1,4 @@
-module Maileon
+module MaileonRuby3
   class API
 
     attr_accessor :host, :path, :apikey, :debug, :session
@@ -11,7 +11,7 @@ module Maileon
         apikey = ENV['MAILEON_APIKEY']
       end
 
-      raise 'You must provide Maileon API key' unless apikey
+      raise ArgumentError.new('You must provide Maileon API key') unless apikey
 
       @apikey = Base64.encode64(apikey).strip
       @debug = debug
@@ -25,8 +25,8 @@ module Maileon
     def create_contact(params, body={})
       raise ArgumentError.new("No parameters.") if params.empty?
       raise ArgumentError.new("Email is mandatory.") if params[:email].nil?
-      raise Maileon::Errors::ValidationError.new("Invalid email format.") unless is_valid_email(params[:email])
-      email = URI::escape(params[:email])
+      raise MaileonRuby3::Errors::ValidationError.new("Invalid email format.") unless is_valid_email(params[:email])
+      email = CGI::escape(params[:email])
       permission = params[:permission] ||= 1
       sync_mode = params[:sync_mode] ||= 2
       src = params[:src]
@@ -44,8 +44,8 @@ module Maileon
     def delete_contact(params)
       raise ArgumentError.new("No parameters.") if params.empty?
       raise ArgumentError.new("Email is mandatory.") if params[:email].nil?
-      raise Maileon::Errors::ValidationError.new("Invalid email format.") unless is_valid_email(params[:email])
-      email = URI::escape(params[:email])
+      raise MaileonRuby3::Errors::ValidationError.new("Invalid email format.") unless is_valid_email(params[:email])
+      email = CGI::escape(params[:email])
       url = "contacts/#{email}"
       @session.delete(:path => "#{@path}#{url}", :headers => get_headers('xml'))
     end

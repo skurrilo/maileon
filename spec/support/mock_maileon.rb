@@ -1,6 +1,6 @@
 require 'sinatra/base'
 
-class MockMaileon < Sinatra::Base
+class MockMaileonRuby3 < Sinatra::Base
 
   API_KEY = 'adsfadsi4292r0vajsfdafldkaf'
 
