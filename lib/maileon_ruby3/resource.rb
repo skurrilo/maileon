@@ -25,17 +25,17 @@ module MaileonRuby3
     def create
       response = @session.post(:path => "#{@path}#{@url}#{get_parameters(method: METHOD_CREATE)}", :headers => get_headers_json, :body => get_body_as_json)
       return if response[:status] == 200 or response[:status] == 201
-      raise RuntimeError.new("API call did not complete. Stauts: #{response[:status]}")
+      raise RuntimeError.new("API call did not complete. Status: #{response.to_json}")
     end
 
     def update
       response = @session.put(:path => "#{@path}#{@url}#{get_parameters(method: METHOD_UPDATE)}", :headers => get_headers_xml, :body => get_body_as_xml)
       return if response[:status] == 200 or response[:status] == 201
-      raise RuntimeError.new("API call did not complete. Stauts: #{response[:status]}")
+      raise RuntimeError.new("API call did not complete. Status: #{response.to_json}")
     end
 
     def get
-      repsonse = @session.get(:path => "#{@path}#{@url}#{get_parameters(custom_fields: @custom_fields)}", :headers => get_headers_xml)
+      repsonse = @session.get(:path => "#{@path}#{@url}#{get_parameters}", :headers => get_headers_xml)
       parse_body(repsonse[:body])
     end
 

@@ -8,3 +8,4 @@ require "maileon_ruby3/errors"
 require "maileon_ruby3/api"
 require 'maileon_ruby3/resource'
 require 'maileon_ruby3/contact'
+require 'maileon_ruby3/transaction'
