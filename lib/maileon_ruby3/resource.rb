@@ -39,6 +39,11 @@ module MaileonRuby3
       parse_body(repsonse[:body])
     end
 
+    def delete
+      repsonse = @session.delete(:path => "#{@path}#{@url}#{get_parameters}", :headers => get_headers_xml)
+      response[:status] == 200
+    end
+
     def get_headers_json
       get_headers(json: true)
     end
