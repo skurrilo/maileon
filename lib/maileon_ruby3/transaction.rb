@@ -2,6 +2,7 @@ module MaileonRuby3
   class Transaction < Resource
     attr_accessor :email
     attr_accessor :type
+    attr_accessor :content
 
     def initialize(apikey: nil, debug: false, email:)
       super(apikey: apikey, debug: debug)
@@ -9,6 +10,7 @@ module MaileonRuby3
 
       @email = email
       @url = "transactions"
+      @content = {}
     end
 
     def update
@@ -25,23 +27,33 @@ module MaileonRuby3
 
     def get_headers_json
       header = super
-      header["Content-Type".to_sym] = 'application/json'
+      header["Content-Type"] = 'application/json'
       header
     end
 
+    def add_content_var(key: nil, value: nil)
+      return false if key.nil?
+      key = key.to_sym
+      if value.nil?
+        @content.delete(key)
+        return true
+      end
+      @content[key] = value
+      true
+    end
+
     def get_body
+      contact = {
+        email: @email,
+        permission: 2,
+      }
       [
         {
           type: @type,
           import: {
-            contact: {
-              email: @email,
-              permission: 2,
-            }
+            contact: contact
           },
-          content: {
-            username: 'skurrilo'
-          }
+          content: @content
         }
       ]
     end
