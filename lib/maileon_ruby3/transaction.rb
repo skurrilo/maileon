@@ -3,6 +3,7 @@ module MaileonRuby3
     attr_accessor :email
     attr_accessor :type
     attr_accessor :content
+    attr_accessor :permission
 
     def initialize(apikey: nil, debug: false, email:)
       super(apikey: apikey, debug: debug)
@@ -11,6 +12,7 @@ module MaileonRuby3
       @email = email
       @url = "transactions"
       @content = {}
+      @permission = 2
     end
 
     def update
@@ -45,7 +47,7 @@ module MaileonRuby3
     def get_body
       contact = {
         email: @email,
-        permission: 2,
+        permission: @permission,
       }
       [
         {
