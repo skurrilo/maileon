@@ -40,7 +40,7 @@ module MaileonRuby3
     end
 
     def delete
-      repsonse = @session.delete(:path => "#{@path}#{@url}#{get_parameters}", :headers => get_headers_xml)
+      response = @session.delete(:path => "#{@path}#{@url}#{get_parameters}", :headers => get_headers_xml)
       response[:status] == 200
     end
 
