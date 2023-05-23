@@ -46,8 +46,10 @@ module MaileonRuby3
     end
 
     def get
-      repsonse = @session.get(:path => "#{@path}#{@url}#{get_parameters(custom_fields: @custom_fields)}", :headers => get_headers_xml)
-      parse_body(repsonse[:body])
+      response = @session.get(:path => "#{@path}#{@url}#{get_parameters(custom_fields: @custom_fields)}", :headers => get_headers_xml)
+      return false unless response[:status] = 200
+      parse_body(response[:body])
+      response
     end
 
     def get_parameters(method: METHOD_GET, standard_fields: DEFAULT_STANDARD_FIELDS, custom_fields: [])
