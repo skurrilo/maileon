@@ -47,7 +47,7 @@ module MaileonRuby3
 
     def get
       response = @session.get(:path => "#{@path}#{@url}#{get_parameters(custom_fields: @custom_fields)}", :headers => get_headers_xml)
-      return false unless response[:status] = 200
+      return false unless response[:status] == 200
       parse_body(response[:body])
       response
     end
