@@ -9,3 +9,5 @@ require "maileon_ruby3/api"
 require 'maileon_ruby3/resource'
 require 'maileon_ruby3/contact'
 require 'maileon_ruby3/transaction'
+require 'maileon_ruby3/contact_filter'
+require 'maileon_ruby3/target_group'
