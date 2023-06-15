@@ -84,10 +84,16 @@ module MaileonRuby3
       sf = ""
       cf = ""
       body[:standard_fields].each do |key, value|
-        sf << "<field><name>#{key.upcase}</name><value>#{value.encode(:xml => :text)}</value></field>"
+        if value.kind_of? String
+          value = value.encode(:xml => :text)
+        end
+        sf << "<field><name>#{key.upcase}</name><value>#{value}</value></field>"
       end
       body[:custom_fields].each do |key, value|
-        cf << "<field><name>#{key}</name><value>#{value.encode(:xml => :text)}</value></field>"
+        if value.kind_of? String
+          value = value.encode(:xml => :text)
+        end
+        cf << "<field><name>#{key}</name><value>#{value}</value></field>"
       end
       "<contact><email>#{@email.encode(:xml => :text)}</email><standard_fields>#{sf}</standard_fields><custom_fields>#{cf}</custom_fields></contact>"
     end
