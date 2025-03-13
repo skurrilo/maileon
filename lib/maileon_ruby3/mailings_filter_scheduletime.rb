@@ -17,19 +17,19 @@ module MaileonRuby3
     end
 
     def create
-      raise RuntimeError('Not implemented.')
+      raise RuntimeError.new('Not implemented.')
     end
 
     def update
-      raise RuntimeError('Not implemented.')
+      raise RuntimeError.new('Not implemented.')
     end
 
     def delete
-      raise RuntimeError('Not implemented.')
+      raise RuntimeError.new('Not implemented.')
     end
 
     def get_parameters(method: METHOD_GET, standard_fields: DEFAULT_STANDARD_FIELDS, schedule_time:)
-      raise RuntimeError('scheduleTime must be a DateTime') if schedule_time.class != DateTime
+      raise RuntimeError.new('scheduleTime must be a DateTime') if schedule_time.class != DateTime
       r = "?scheduleTime=#{CGI::escape(schedule_time.strftime('%Y-%m-%d %H:%M:%S'))}&beforeSchedulingTime=false&"
       standard_fields.each { |field| r = r + "fields=#{CGI::escape(field)}&"}
       r.chomp('&')

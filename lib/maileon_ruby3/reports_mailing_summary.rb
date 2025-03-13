@@ -9,22 +9,22 @@ module MaileonRuby3
     end
 
     def get(mailing_id: nil)
-      raise RuntimeError('Mailing-ID must be set.') if mailing_id.nil?
+      raise RuntimeError.new('Mailing-ID must be set.') if mailing_id.nil?
       response = @session.get(:path => "#{@path}#{@url}#{get_parameters(mailing_id: mailing_id)}", :headers => get_headers_xml)
       return unless response[:status] == 200
       parse_body(response[:body])
     end
 
     def create
-      raise RuntimeError('Not implemented.')
+      raise RuntimeError.new('Not implemented.')
     end
 
     def update
-      raise RuntimeError('Not implemented.')
+      raise RuntimeError.new('Not implemented.')
     end
 
     def delete
-      raise RuntimeError('Not implemented.')
+      raise RuntimeError.new('Not implemented.')
     end
 
     def get_parameters(method: METHOD_GET, mailing_id: nil)

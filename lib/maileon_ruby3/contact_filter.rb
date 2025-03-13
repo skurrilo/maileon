@@ -13,15 +13,15 @@ module MaileonRuby3
     end
 
     def create
-      raise RuntimeError('Not implemented.')
+      raise RuntimeError.new('Not implemented.')
     end
 
     def update
-      raise RuntimeError('Not implemented.')
+      raise RuntimeError.new('Not implemented.')
     end
 
     def delete
-      raise RuntimeError('Not implemented.')
+      raise RuntimeError.new('Not implemented.')
     end
 
     def parse_body(body)
