@@ -29,7 +29,7 @@ module MaileonRuby3
     end
 
     def get_parameters(method: METHOD_GET, standard_fields: DEFAULT_STANDARD_FIELDS, schedule_time:)
-      raise RuntimeError.new('scheduleTime must be a DateTime') if schedule_time.class != DateTime
+      raise RuntimeError.new('scheduleTime must be a Date') unless schedule_time.respond_to?(:strftime)
       r = "?scheduleTime=#{CGI::escape(schedule_time.strftime('%Y-%m-%d %H:%M:%S'))}&beforeSchedulingTime=false&"
       standard_fields.each { |field| r = r + "fields=#{CGI::escape(field)}&"}
       r.chomp('&')
